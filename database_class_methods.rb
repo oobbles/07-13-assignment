@@ -35,9 +35,10 @@ module DatabaseClassMethods
   #
   # Returns an Array containing Objects for each row.
   def all
-    results = CONNECTION.execute("SELECT * FROM #{table_name}")
+    # results =  
+    CONNECTION.execute("SELECT * FROM #{table_name}")
 
-    results_as_objects(results)
+    # results_as_objects(results)
 
   end
 
