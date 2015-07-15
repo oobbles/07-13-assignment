@@ -5,6 +5,7 @@ class Assignment
   attr_reader :id
   attr_accessor :description
 
+
   def to_hash
     {
       "description" => self.description
@@ -42,7 +43,7 @@ class Assignment
   # name - String
   #
   # Returns an Assignment Object
-  def self.add(name)
+  def self.add(description)
     CONNECTION.execute("INSERT INTO assignments (description) VALUES ('#{description}');")
     id = CONNECTION.last_insert_row_id
     Assignment.find(id)
