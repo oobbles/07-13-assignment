@@ -1,6 +1,7 @@
 function insertAfter(newNode, referenceNode) {
   referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
 }
+
 var req = new XMLHttpRequest();
 req.open("get", "/api/assignments");
 
@@ -9,26 +10,36 @@ req.addEventListener("load", function(){
     // var container = document.getElementById("main");
     var container_ul = document.getElementById("listhere");
     // container.innerHTML = this.response[i];
-    descript_li=this.response[i].description;
-    my_id=this.response[i].id;
-
+    var descript_li=this.response[i].description;
+    var my_id=this.response[i].id;
     add_li = document.createElement("li");
     add_li.innerHTML=descript_li;
+    add_li.setAttribute("data-id", my_id)
+
     add_li.addEventListener('click', function() {
       var req2 = new XMLHttpRequest();
-      str = ["/api/assignment_collabs/" , my_id].join("");
+      var str = "/api/assignment_collabs/" + this.getAttribute("data-id");
+      var clicked_li = this;
+
       req2.open("get", str);
+
+      req2.addEventListener("load", function(){
+        var collab_name = this.response.join(", ");
+        add_div = document.createElement("div");
+        add_div.innerHTML=collab_name;
+        insertAfter(add_div, clicked_li);
+
+      });
       req2.responseType = "json";
       req2.send();
-});
-    insertAfter(add_li, container_ul);
+    });
 
+    insertAfter(add_li, container_ul);
   }
-})
+});
 
 req.responseType = "json";
 req.send();
-
 //
 // for (var key in p) {
 //   if (p.hasOwnProperty(key)) {

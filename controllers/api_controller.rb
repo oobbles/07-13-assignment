@@ -27,6 +27,17 @@ end
 json link_names
 end
 
+# #This gives you the collabs associated with a specific assignment
+# get "/api/assignment_collabs/:id" do
+#   id = params["id"].to_i
+#   assignment=Assignment.find(id) #an assignment object?
+#   collab_array=assignment.find_collabs
+#   collab_names=[]
+#   collab_array.each do |collab_object|
+#     collab_names<<collab_object.to_hash
+# end
+# json collab_names
+# end
 #This gives you the collabs associated with a specific assignment
 get "/api/assignment_collabs/:id" do
   id = params["id"].to_i

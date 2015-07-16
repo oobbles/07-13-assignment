@@ -17,6 +17,12 @@ class Collab
     @name = options["name"]
   end
 
+  def to_hash
+    {
+      "name" => self.name
+      #description: self.description
+    }
+  end
   # Check to see if name exisits
   #
   # name - String
